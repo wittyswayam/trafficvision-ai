@@ -15,9 +15,8 @@
   ╚═══╝  ╚═╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝     ╚═╝  ╚═╝╚═╝
 ```
 
-# 🚦 TrafficVision-AI
+### 🚦 TrafficVision-AI
 
-### Enterprise-Grade Road Traffic Sign & Light Recognition Platform
 
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.15+-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://tensorflow.org)
@@ -28,7 +27,7 @@
 [![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
 [![Coverage](https://img.shields.io/badge/Coverage-85%25-brightgreen?style=for-the-badge)](htmlcov/)
 
-*A production-grade, cloud-native AI platform for real-time road traffic object detection and localization — built to FAANG engineering standards.*
+*A production-grade, cloud-native AI platform for real-time road traffic object detection and localization.*
 
 [🔍 Architecture](#-enterprise-architecture) •
 [🚀 Quick Start](#-quick-start) •
@@ -255,7 +254,7 @@ trafficvision-ai/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/trafficvision-ai.git
+git clone https://github.com/wittyswayam/trafficvision-ai.git
 cd trafficvision-ai
 
 # Configure environment
@@ -1089,7 +1088,7 @@ MIT License — see [LICENSE](LICENSE) for details.
   title   = {TrafficVision-AI: Enterprise Road Traffic Recognition Platform},
   version = {2.0.0},
   year    = {2025},
-  url     = {https://github.com/your-org/trafficvision-ai},
+  url     = {https://github.com/wittyswayam/trafficvision-ai},
   license = {MIT}
 }
 ```
@@ -1097,8 +1096,6 @@ MIT License — see [LICENSE](LICENSE) for details.
 ---
 
 <div align="center">
-
-Built with ❤️ by the TrafficVision-AI Engineering Team
 
 *Making roads safer through enterprise-grade computer vision*
 
