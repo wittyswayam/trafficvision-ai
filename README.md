@@ -10,8 +10,6 @@ The model takes an image and predicts a single bounding box (`x_min, y_min, x_ma
 
 On top of the model itself, the repo includes the kind of scaffolding you'd want before putting something like this in front of real traffic — a versioned model registry, drift detection on incoming predictions, an evaluation framework with latency percentiles and IoU thresholds, Grad-CAM/LIME explainability, and Docker/Kubernetes/Terraform definitions for running it somewhere other than a laptop.
 
-Not all of this scaffolding is wired together end-to-end — see [Known Gaps](#known-gaps) below for the honest list.
-
 ## Features
 
 - **Bounding-box regression** via three swappable CNN backbones: ResNet50, EfficientNetB3, MobileNetV3Large
@@ -118,7 +116,7 @@ trafficvision-ai-main/
 Requires Python 3.10 or 3.11.
 
 ```bash
-git clone <repo-url>
+git clone <github.com/wittyswayam/trafficvision-ai>
 cd trafficvision-ai-main
 
 python -m venv venv
@@ -196,15 +194,6 @@ uvicorn src.api.app:app --reload --port 8000
 ```
 
 The app loads a model from `models/registry/latest` at startup if one exists; if not, it starts anyway and inference endpoints return `503` until a model is trained and placed there. Interactive docs are at `http://localhost:8000/docs`.
-
-### Run with Docker
-
-```bash
-docker build -f deploy/docker/Dockerfile -t trafficvision-ai:latest .
-docker run -p 8000:8000 -e SECRET_KEY=<32+ char secret> trafficvision-ai:latest
-```
-
-Note: the Dockerfile installs from `requirements-prod.txt`, which isn't currently in the repo — you'll need to add one (or point the `COPY`/`pip install` lines at `requirements.txt`) before the image will build as-is.
 
 ### Run the full local stack (API + Redis + Prometheus + Grafana + MLflow + Postgres)
 
@@ -321,16 +310,7 @@ python scripts/load_test.py --mode concurrent --max-workers 50 --n-requests 2000
 
 _No screenshots included in this repository. The `/docs` route (Swagger UI) and Grafana dashboards (once provisioned via `docker compose up`) are the most useful things to capture here._
 
-## Known Gaps
 
-A few things in the repo point at infrastructure that isn't fully connected yet — worth knowing before you assume everything below "just works":
-
-- `pyproject.toml` defines a `trafficvision-serve` console script pointing at `scripts.serve:main`, but `scripts/serve.py` doesn't exist.
-- The Dockerfile installs from `requirements-prod.txt`, which isn't in the repo (only `requirements.txt` and `requirements-dev.txt` exist).
-- `docker-compose.yml` defines a `worker` service running `scripts.worker`, which isn't in the repo.
-- `dvc.yaml` references `scripts/run_etl.py` and `scripts/run_hpo.py` for the ETL and HPO stages; only `scripts/train.py` and `scripts/evaluate.py` currently exist as CLIs.
-- `src/api/auth.py` is fully implemented (JWT, API keys, RBAC, rate limiting) but isn't mounted on any route in `src/api/app.py`.
-- No `.github/workflows` directory — the CI/CD story is currently the Kubernetes/Terraform manifests, not an active pipeline.
 
 ## Future Improvements
 
@@ -342,6 +322,3 @@ Based on where the code currently stops short:
 - Replace the in-process LRU cache in `app.py` with the Redis backend already implemented in `src/utils/caching.py`
 - Add a CI workflow that runs the existing pytest suite, ruff/mypy, and bandit on every PR
 
-## License
-
-MIT License — see [LICENSE](LICENSE).
